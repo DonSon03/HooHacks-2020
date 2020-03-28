@@ -21,13 +21,14 @@ app.listen(port, () => {
 
 app.post("/api/send_sms", function(req, res) {
     var messageBody = req.body.message;
+    var sendToPhoneNumber = req.body.phone_number
 
     client.messages.create({
         body: messageBody,
         from: twilioPhoneNumber,
-        to: '+12403867154'
+        to: sendToPhoneNumber
     })
     .then(message => console.log(message.sid));
 
-    res.send('sent message: ' + messageBody);
+    res.send('sent message (' + messageBody + ') to ' + sendToPhoneNumber);
 });
