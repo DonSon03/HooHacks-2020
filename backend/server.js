@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 require('dotenv').config();
 
@@ -14,6 +15,22 @@ const client = require('twilio')(accountSid, authToken);
 
 app.use(cors());
 app.use(express.json());
+
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { dbName: "HooDB", useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}
+);
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB database connection established successfully");
+})
+
+const consumerRouter = require('./routes/consumers');
+const distributorRouter = require('./routes/distributors');
+
+app.use('/consumers', consumerRouter);
+app.use('/distributors', distributorRouter);
+
 
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);
@@ -38,7 +55,6 @@ app.post("/api/send_sms", function(req, res) {
 });
 
 app.get("/api/get_verification_service", function(req, res) {
-
     const friendlyName = req.param('friendly_name');
 
     client.verify.services.create({friendlyName: friendlyName})
@@ -70,7 +86,6 @@ app.get("/api/send_verification_token", function(req, res) {
 });
 
 app.get("/api/check_verification_token", function(req, res) {
-
     const sid = req.param('sid');
     const phoneNumber = req.param('phone_number');
     const code = req.param('code');
