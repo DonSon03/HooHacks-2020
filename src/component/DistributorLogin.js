@@ -5,6 +5,8 @@ import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
 
 import { Spin, Icon, Card, Divider, List, Avatar } from 'antd';
 
+import Cookies from "js-cookie"
+
 const { Meta } = Card;
 
 class DistributorLogin extends Component{
@@ -25,7 +27,10 @@ class DistributorLogin extends Component{
         }
         console.log(user);
         axios.post('http://localhost:5000/distributors/add', user)
-          .then(res => console.log(res.data));
+          .then(res => {
+              Cookies.set('distributorLogin',{uid:res.data,...user},{expires:1})
+              window.location.reload()
+          });
     }
 
     render(){

@@ -28,7 +28,7 @@ class CustomerHome extends Component{
             );
         } else {
             return (
-                <div className="customer-login-style">
+                <div className="customer-login-style" htmlType="submit">
                     <Row>
                         <CustomerLogin/>
                     </Row>

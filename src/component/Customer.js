@@ -50,7 +50,8 @@ class Customer extends Component{
                             address: address,
                             lat: geocodeResult.data.results[0].geometry.location.lat,
                             lng: geocodeResult.data.results[0].geometry.location.lng,
-                            locations: locations
+                            locations: locations,
+                            user: JSON.parse(Cookies.get("customerLogin"))
                         })
                         
                     }
@@ -63,6 +64,7 @@ class Customer extends Component{
     render(){
         return(
             <div>
+          
             {this.state.usedSearch 
                 ? <Search placeholder="input search text" disabled /> 
                 : <Search placeholder="input search text" onSearch={value => this.onSearch(value)} enterButton />}

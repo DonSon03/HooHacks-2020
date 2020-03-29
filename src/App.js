@@ -9,8 +9,9 @@ import {
 
 import Customer from "./component/Customer"
 import CustomerHome from "./component/CustomerHome"
-import Distributor from "./component/Distributor"
+import DistributorHome from "./component/DistributorHome"
 import Verify from "./component/Verify"
+
 
 function App() {
   return (
@@ -31,17 +32,17 @@ function App() {
           </ul>
         </nav> */}
       <Switch>
-
-        <Route path="/verify">
-          <Verify />
-        </Route>
-
+        
         <Route path="/customer">
           <Customer />
         </Route>
 
         <Route path="/distributor">
-          <Distributor />
+          <DistributorHome />
+        </Route>
+    
+        <Route path="/verify">
+          <Verify />
         </Route>
 
         <Route path="/">
