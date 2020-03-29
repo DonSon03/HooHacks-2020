@@ -17,7 +17,7 @@ function App() {
     // <div className="App-header">
     <Router>
       <div>
-        {/* <nav>
+        <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -26,7 +26,7 @@ function App() {
               <Link to="/customer">Customer</Link>
             </li>
           </ul>
-        </nav> */}
+        </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

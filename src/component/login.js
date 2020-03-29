@@ -22,7 +22,7 @@ class Login extends Component{
     render(){
         return (
 
-            <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '10%', marginRight:'5%',marginTop:'10%'}}>
+            <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '18%', marginRight:'5%',marginTop:'12%'}}>
                 <Meta
                     title={<h1>Supply Me!</h1>}
                     style={{color:'#1A2E33'}}
