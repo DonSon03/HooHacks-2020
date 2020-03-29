@@ -30,7 +30,7 @@ class Chooser extends Component{
             {
                 this.props.locations.map(
                     location =>
-                    <Form.Item name={location.indexMap} label={location.tagName} valuePropName="unchecked">
+                    <Form.Item name={location.indexMap} label={location.tagName} valuePropName="unchecked" key={location.indexMap}>
                         <Switch />
                     </Form.Item>
                 )

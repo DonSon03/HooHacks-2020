@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Map from './Map'
-import { Input,Button,Typography} from 'antd';
-import EmptyMap from './EmptyMap';
+import { Input,Typography} from 'antd';
+import EmptyBox from './EmptyBox';
 import Chooser from './Chooser'
 import UserInfo from './UserInfo'
 import { Row, Col } from 'antd';
@@ -17,17 +17,12 @@ class Customer extends Component{
 
     constructor(){
         super();
-        this.state = {usedSearch: false, address: "", lat: null, lng: null, locations: []}
+        this.state = {usedSearch: false, address: "", lat: null, lng: null, locations: [], user: JSON.parse(Cookies.get("customerLogin"))}
         this.onSearch = this.onSearch.bind(this);
     }
 
     componentDidMount(){
 
-    }
-
-    signout(){
-        Cookies.remove('customerLogin')
-        window.location.reload()
     }
 
     onSearch(address){
@@ -68,29 +63,32 @@ class Customer extends Component{
     render(){
         return(
             <div>
-                <Button onClick={this.signout}>signout</Button>
-                <Title>{Cookies.get("customerLogin")}</Title>
             {this.state.usedSearch 
                 ? <Search placeholder="input search text" disabled /> 
                 : <Search placeholder="input search text" onSearch={value => this.onSearch(value)} enterButton />}
             
-            {this.state.usedSearch ? 
+            
             <Row>
                 <Col span={16}>
+                {this.state.usedSearch ? 
                 <Map address={this.state.address} center={{lat: this.state.lat, lng: this.state.lng}} locations={this.state.locations}/>
+                : 
+                <EmptyBox message="Enter in an address to see surrounding pharmacies."/>
+                }
                 </Col>
                 <Col span={8}>
                     <Row>
-                        <UserInfo firstName='Edwin' phoneNumber='2403867154'/>
+                        <UserInfo firstName={this.state.user.firstName} phoneNumber={this.state.user.phoneNumber}/>
                     </Row>
                     <Row>
+                        {this.state.usedSearch ? 
                         <Chooser locations={this.state.locations} />
+                        : 
+                        <EmptyBox message="Enter in an address to see the list of nearby pharmacies."/>
+                        }
                     </Row>
                 </Col>
             </Row>
-             : 
-             <EmptyMap />
-             }
             
             </div>
         );

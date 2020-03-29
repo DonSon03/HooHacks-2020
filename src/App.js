@@ -10,6 +10,7 @@ import {
 import Customer from "./component/Customer"
 import CustomerHome from "./component/CustomerHome"
 import Distributor from "./component/Distributor"
+import Verify from "./component/Verify"
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
           </ul>
         </nav> */}
       <Switch>
+
+        <Route path="/verify">
+          <Verify />
+        </Route>
 
         <Route path="/customer">
           <Customer />

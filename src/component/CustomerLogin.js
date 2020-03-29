@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
+import {Redirect} from "react-router-dom"
 
 import Cookies from "js-cookie"
 
@@ -16,37 +17,49 @@ class CustomerLogin extends Component{
     constructor(props){
         super(props);
 
-        this.state = {};
+        this.state = {redirect: false};
 
         this.onFinish = this.onFinish.bind(this);
     }
 
     onFinish(values){
-        console.log(values);
 
         const user = {
             firstName: values.firstName,
             phoneNumber: values.phoneNumber
         }
-        console.log(user);
+
         axios.post('http://localhost:5000/consumers/add', user)
-            .then(res =>{
-                Cookies.set('customerLogin',user,{expires:1})
-                window.location.reload()
+            .then(mongoRes =>{
+
+                console.log(mongoRes)
+
+                axios.get('http://localhost:5000/api/get_verification_service?friendly_name=Supply Me', user)
+                    .then(getVerificationServiceRes =>{
+                        console.log(getVerificationServiceRes)
+                        const createdSid = getVerificationServiceRes.data.data.sid
+                        const sendPhoneNumber = user.phoneNumber
+                        console.log("http://localhost:5000/api/send_verification_token?sid=" + createdSid + "&phone_number=" + sendPhoneNumber)
+                        axios.get("http://localhost:5000/api/send_verification_token?sid=" + createdSid + "&phone_number=" + sendPhoneNumber)
+                            .then(sendTokenRes =>{
+
+                                this.setState({user: user, redirect:true, sid: createdSid})
+                                // Cookies.set('customerLogin',user,{expires:1})
+                                // window.location.reload()
+                            });
+                        
+                    });
+
             });
     
-        this.setState({
-          firstName: '',
-          phoneNumber: ''
-        })
-
-        //if Verified (Move this into axios)
-        if(true){
-        } 
-
     }
 
     render(){
+
+        if(this.state.redirect){
+            return <Redirect to={{ pathname: '/verify', state: { user: this.state.user, sid: this.state.sid }}} />
+        }
+
         return (
             <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '10%', marginRight:'5%',marginTop:'10%'}}>
             <Meta
@@ -103,7 +116,7 @@ class CustomerLogin extends Component{
             </Button>
             <br></br>
             <br></br>
-            Distributors log in : <a href="/distributor">here</a>
+            Distributors log in: <a href="/distributor">here</a>
             </Form.Item>
             
             </Form>

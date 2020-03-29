@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Empty } from 'antd';
 
-class EmptyMap extends Component{
+class EmptyBox extends Component{
+
+    constructor(props){
+        super(props);
+    }
     
     render(){
         return(
@@ -12,9 +16,10 @@ class EmptyMap extends Component{
             }}
             description={
             <span>
-                Enter in an address to see surrounding Pharmacies.
+                {this.props.message}
             </span>
             }
+            style={{marginTop:'25%'}}
             >
             </Empty>
         )
@@ -22,4 +27,4 @@ class EmptyMap extends Component{
 
 }
 
-export default EmptyMap;
+export default EmptyBox;
