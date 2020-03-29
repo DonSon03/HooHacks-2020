@@ -8,8 +8,10 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+  const firstName = req.body.firstName;  
   const phoneNumber = req.body.phoneNumber;
   const newConsumer = new Consumer({
+    firstName,
     phoneNumber
   });
   newConsumer.save()

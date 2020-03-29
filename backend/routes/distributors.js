@@ -8,12 +8,13 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const phoneNumber = req.body.phoneNumber;
-  const address = req.body.address;
+    const pharmacyName = req.body.pharmacyName;
+    const phoneNumber = req.body.phoneNumber;
+  
 
   const newDistributor = new Distributor({
-    phoneNumber,
-    address,
+    pharmacyName,
+    phoneNumber
 });
 
   newDistributor.save()

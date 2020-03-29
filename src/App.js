@@ -7,40 +7,25 @@ import {
   Link
 } from "react-router-dom";
 
-import Home from "./component/Home"
-import Login from "./component/Login"
-import Signup from "./component/Signup"
 import Customer from "./component/Customer"
+import Distributor from "./component/Distributor"
 
 function App() {
   return (
     // <div className="App-header">
     <Router>
       <div>
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/customer">Customer</Link>
-            </li>
-          </ul>
-        </nav> */}
+      <Switch>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
+<Route path="/distributor">
+  <Distributor />
+</Route>
 
-          <Route path="/customer">
-            <Customer />
-          </Route>
+<Route path="/">
+  <Customer />
+</Route>
 
-          <Route path="/">
-            <Home />
-          </Route>
-
-        </Switch>
+</Switch>
       </div>
     </Router>
     // </div>
