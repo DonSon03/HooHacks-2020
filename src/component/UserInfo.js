@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Descriptions } from 'antd';
 
 class UserInfo extends Component{
 

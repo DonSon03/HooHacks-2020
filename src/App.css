@@ -15,14 +15,29 @@
   }
 }
 
-.home-style {
+.customer-login-style {
   /* background-color: #282c34; */
   /* display: flex; */
-  background: url(./assets/images/homeBackground.jpg);
+  background: url(./assets/images/customerBackground.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
   min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.distributor-login-style {
+  /* background-color: #282c34; */
+  background: url(./assets/images/distributorBackground.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  min-height: 100vh;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;

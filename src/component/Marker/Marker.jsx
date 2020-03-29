@@ -5,13 +5,13 @@ import { Modal, Button } from 'antd';
 
 import {markerStyle, markerStyleHover} from './marker_style.js';
 
-export default class MyGreatPlaceWithHover extends Component {
-  static propTypes = {
-    // GoogleMap pass $hover props to hovered components
-    // to detect hover it uses internal mechanism, explained in x_distance_hover example
-    $hover: Boolean,
-    text: String
-  };
+export default class Marker extends Component {
+//   static propTypes = {
+//     // GoogleMap pass $hover props to hovered components
+//     // to detect hover it uses internal mechanism, explained in x_distance_hover example
+//     $hover: Boolean,
+//     text: String
+//   };
 
   static defaultProps = {};
 
@@ -29,14 +29,12 @@ export default class MyGreatPlaceWithHover extends Component {
     };
 
     handleOk = e => {
-        console.log(e);
         this.setState({
         visible: false,
         });
     };
 
     handleCancel = e => {
-        console.log(e);
         this.setState({
         visible: false,
         });

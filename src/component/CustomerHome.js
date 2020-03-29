@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-import Login from './Login'
+import CustomerLogin from './CustomerLogin'
 import { Row, Col } from 'antd';
 
-class Home extends Component{
+class CustomerHome extends Component{
 
     render(){
         return (
 
-            <div className="home-style">
+            <div className="customer-login-style">
                 <Row>
                     {/* <Col span={8}> */}
-                    <Login/>
+                    <CustomerLogin/>
                     {/* </Col>
                     <Col span={8}>
                     </Col>
@@ -26,4 +26,4 @@ class Home extends Component{
     }
 }
 
-export default Home;
+export default CustomerHome;

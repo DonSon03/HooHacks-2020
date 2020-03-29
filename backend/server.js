@@ -18,7 +18,7 @@ app.use(express.json());
 
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { dbName:"hooDB", useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+mongoose.connect(uri, { dbName:"HooDB", useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -28,6 +28,13 @@ connection.once('open', () => {
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);
 });
+
+const consumerRouter = require('./routes/consumers');
+const distributorRouter = require('./routes/distributors');
+
+app.use('/consumers', consumerRouter);
+app.use('/distributors', distributorRouter);
+
 
 app.post("/api/send_sms", function(req, res) {
     const messageBody = req.body.message;

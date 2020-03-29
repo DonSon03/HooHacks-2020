@@ -7,10 +7,9 @@ import {
   Link
 } from "react-router-dom";
 
-import Home from "./component/Home"
-import Login from "./component/Login"
-import Signup from "./component/Signup"
 import Customer from "./component/Customer"
+import CustomerHome from "./component/CustomerHome"
+import Distributor from "./component/Distributor"
 
 function App() {
   return (
@@ -20,27 +19,31 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Customer Home</Link>
             </li>
             <li>
-              <Link to="/customer">Customer</Link>
+              <Link to="/customer">Customer Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/distributor">Distributor Home</Link>
             </li>
           </ul>
         </nav>
+      <Switch>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
+        <Route path="/customer">
+          <Customer />
+        </Route>
 
-          <Route path="/customer">
-            <Customer />
-          </Route>
+        <Route path="/distributor">
+          <Distributor />
+        </Route>
 
-          <Route path="/">
-            <Home />
-          </Route>
+        <Route path="/">
+          <CustomerHome />
+        </Route>
 
-        </Switch>
+      </Switch>
       </div>
     </Router>
     // </div>

@@ -6,11 +6,14 @@ class Chooser extends Component{
     constructor(props){
         super(props);
         this.state = {
-            locations: this.props.locations
+            targetKeys: this.props.targetKeys
         }
     }
 
-    filterOption = (inputValue, option) => option.description.indexOf(inputValue) > -1;
+    filterOption = (inputValue, location) => 
+        // const name = location.name + " (" + index + ")";
+        location.name.indexOf(inputValue) > -1;
+    
 
     handleChange = targetKeys => {
         this.setState({ targetKeys });
@@ -23,10 +26,10 @@ class Chooser extends Component{
     render(){
         return(
             <Transfer
-                dataSource={this.state.locations}
+                dataSource={this.props.locations}
                 showSearch
                 filterOption={this.filterOption}
-                targetKeys={this.state.locations}
+                targetKeys={this.state.targetKeys}
                 onChange={this.handleChange}
                 onSearch={this.handleSearch}
                 render={item => item.title}
