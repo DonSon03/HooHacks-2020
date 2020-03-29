@@ -16,7 +16,7 @@ function App() {
     // <div className="App-header">
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Customer Home</Link>
@@ -28,7 +28,7 @@ function App() {
               <Link to="/distributor">Distributor Home</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       <Switch>
 
         <Route path="/customer">

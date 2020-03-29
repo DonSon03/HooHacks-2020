@@ -38,23 +38,26 @@ class Customer extends Component{
         const geocodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=" + process.env.REACT_APP_GOOGLE_MAPS_KEY;
         const nearbyURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+drugStoreQuery+"&key=" + process.env.REACT_APP_GOOGLE_MAPS_KEY;
 
-        console.log(geocodeURL)
-        console.log(nearbyURL)
-
         axios.get(proxyurl + geocodeURL)
             .then(geocodeResult => {
                 axios.get(proxyurl + nearbyURL)
                     .then(nearbyResult => {
-                        console.log(geocodeResult)
-                        console.log(nearbyResult)
+
+                        const locations = nearbyResult.data.results
+                        
+                        for(var i = 0; i < locations.length; i++){
+                            locations[i].tagName = locations[i].name + " (" + (i+1) + ")";
+                            locations[i].indexMap = i+1;
+                        }
 
                         this.setState({
                             usedSearch: true,
                             address: address,
                             lat: geocodeResult.data.results[0].geometry.location.lat,
                             lng: geocodeResult.data.results[0].geometry.location.lng,
-                            locations: nearbyResult.data.results
+                            locations: locations
                         })
+                        
                     }
                 );
             }
@@ -78,11 +81,11 @@ class Customer extends Component{
                 </Col>
                 <Col span={8}>
                     <Row>
-                        <UserInfo firstName='Edwin' lastName='Yu' phoneNumber='2403867154' address={this.state.address}/>
+                        <UserInfo firstName='Edwin' phoneNumber='2403867154'/>
                     </Row>
-                    {/* <Row>
-                        <Chooser locations={this.state.locations} targetKeys={this.state.locations.map((location,index)=>location.name + " (" + index + ")")}/>
-                    </Row> */}
+                    <Row>
+                        <Chooser locations={this.state.locations} />
+                    </Row>
                 </Col>
             </Row>
              : 
