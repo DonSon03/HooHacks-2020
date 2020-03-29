@@ -12,7 +12,6 @@ import CustomerHome from "./component/CustomerHome"
 import DistributorHome from "./component/DistributorHome"
 import Verify from "./component/Verify"
 
-
 function App() {
   return (
     // <div className="App-header">

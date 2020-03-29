@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import DistributorLogin from './DistributorLogin'
 import { Row, Col, Button,Card,Typography,Form,InputNumber} from 'antd';
 import Cookies from 'js-cookie'
+import { LogoutOutlined } from '@ant-design/icons';
 
 const {Title} = Typography
 class Distributor extends Component{
@@ -40,7 +41,7 @@ class Distributor extends Component{
                 <div>
                     
                     <Card title = {<Title level={1}>{this.state.user.pharmacyName+" "+this.state.user.companyNumber}</Title>}
-                        extra={<Button onClick={this.signout}>signOut</Button>}
+                        extra={<Button onClick={this.signout} icon={<LogoutOutlined />}></Button>}
                         bordered={true}
                         style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '20%', marginRight:'20%',marginTop:'5%'}}
                     >

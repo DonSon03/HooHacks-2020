@@ -64,7 +64,7 @@ class CustomerLogin extends Component{
             <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '10%', marginRight:'5%',marginTop:'10%'}}>
             <Meta
                 title={<h1>Supply Me!</h1>}
-                style={{color:'#1A2E33'}}
+                style={{color:'#1A2E33', textAlign:'center'}}
             />
 
             <Divider/>
@@ -76,6 +76,7 @@ class CustomerLogin extends Component{
                 remember: true,
             }}
             onFinish={this.onFinish}
+            style={{textAlign:'center'}}
             >
             <Form.Item
             name="firstName"

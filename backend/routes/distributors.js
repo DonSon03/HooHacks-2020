@@ -11,15 +11,27 @@ router.route('/add').post((req, res) => {
     const pharmacyName = req.body.pharmacyName;
     const companyNumber = req.body.companyNumber;
   
+    Distributor.find({companyNumber: companyNumber})
+    .then(exercise => {
+      console.log(exercise)
+      if(exercise.length === 0){
+        const newDistributor = new Distributor({
+            pharmacyName,
+            companyNumber
+        });
+        
+          newDistributor.save()
+          .then(result => res.json(result))
+          .catch(err => res.status(400).json('Error: ' + err));
+      }
+      else{
+        res.json(exercise[0])
+      }
+      
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 
-  const newDistributor = new Distributor({
-    pharmacyName,
-    companyNumber
-});
-
-  newDistributor.save()
-  .then(() => res.json('Distributor Added!'))
-  .catch(err => res.status(400).json('Error: ' + err));
+  
 });
 
 router.route('/:id').get((req, res) => {
