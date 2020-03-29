@@ -47,7 +47,6 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Distributor.findById(req.params.id)
     .then(distributor => {
-      distributor.address = req.body.address  ; 
       distributor.toiletPaper = req.body.toiletPaper;
       distributor.mask = req.body.mask;
       distributor.handSanitizers = req.body.handSanitizers;
@@ -77,6 +76,11 @@ router.route('/updateCompanyPhoneList/').post((req, res) => {
         .then(result => res.json(result.pharmacyName))
         .catch(err => res.status(400).json('Error: ' + err));
     })
+});
+  
+router.route('/google/:google_id').get((req, res) => {
+  Distributor.findOne({unique_id : req.params.google_id})
+    .then(distributor => res.json(distributor))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 

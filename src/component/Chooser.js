@@ -11,8 +11,6 @@ class Chooser extends Component{
     }
 
     onFinish(values){
-        console.log(values);
-        console.log(values.phoneNumber)
         
         for(var id in values){
             if(values[id]){
@@ -28,10 +26,10 @@ class Chooser extends Component{
             description: "Successful subscribed to pharmacies!",
             duration: 3
         });
+      
     }
 
     render(){
-        console.log(this.props)
         return(
             <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '10%', marginRight:'10%', height: '65vh',marginTop:'5%'}}>
             <Meta

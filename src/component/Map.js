@@ -21,6 +21,7 @@ class Map extends Component {
                 defaultZoom={11}
                 >
                 {
+                    
                     this.props.locations.map(
                         (location,index) => 
                         <Marker
@@ -29,6 +30,7 @@ class Map extends Component {
                         lng={location.geometry.location.lng}
                         locationName={location.tagName}
                         text={location.indexMap}
+                        gid={location.id}
                         />
                     )
                 }

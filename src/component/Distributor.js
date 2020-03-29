@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 import DistributorLogin from './DistributorLogin'
-import { Row, Col, Button,Card,Typography,Form,InputNumber} from 'antd';
+import { Row, Col, Button,Card,Typography,Form,InputNumber,Input} from 'antd';
 import Cookies from 'js-cookie'
 import { LogoutOutlined } from '@ant-design/icons';
+import axios from 'axios'
 
 const {Title} = Typography
+const { TextArea } = Input
 class Distributor extends Component{
 
     constructor(){
@@ -18,18 +20,39 @@ class Distributor extends Component{
     }
 
     componentDidMount(){
-        console.log(JSON.parse(Cookies.get("distributorLogin")))
-        console.log("doneee")
-        this.setState({
-            user: JSON.parse(Cookies.get("distributorLogin")),
-            address: '843-23 Gyeongseo-dong, Seo-gu, Incheon, South Korea',
-            TPcount:100,
-            HScount:200,
-            Mcount:654,
-        })
+        const cookieInfo = JSON.parse(Cookies.get("distributorLogin"))
+        console.log(cookieInfo)
+
+        axios.get('http://localhost:5000/distributors/'+cookieInfo.uid._id)
+            .then(res=>{
+                this.setState({
+                    user: cookieInfo,
+                    address: cookieInfo.uid.address,
+                    TPcount:res.data.toiletPaper,
+                    HScount:res.data.handSanitizers,
+                    Mcount:res.data.mask,
+                    note:res.data.descriptions
+                })
+            })
+        
+
+
+
+        
     }
     onFinish(values){
-        window.location.reload()
+        const cookieInfo = JSON.parse(Cookies.get("distributorLogin"))
+        const updateVals = {
+            toiletPaper:values.TPcount,
+            mask:values.Mcount,
+            handSanitizers:values.HScount,
+            descriptions:values.note
+        }
+        axios.post("http://localhost:5000/distributors/update/"+cookieInfo.uid._id,updateVals)
+            .then(res=>{
+                window.location.reload()
+            })
+
     }
     notify(){
         console.log("notify")
@@ -40,14 +63,14 @@ class Distributor extends Component{
             return (
                 <div>
                     
-                    <Card hoverable={true} title = {<Title level={1}>{this.state.user.pharmacyName+" "+this.state.user.companyNumber}</Title>}
+                    <Card hoverable={true} title = {<Title level={1}>{this.state.user.uid.pharmacyName+" | Phone #"+this.state.user.uid.companyNumber}</Title>}
                         extra={<Button onClick={this.signout} icon={<LogoutOutlined />}></Button>}
                         bordered={true}
                         style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '20%', marginRight:'20%',marginTop:'5%'}}
                     >
-                        <Title level={3}>{this.state.address}</Title>
+                        <Title level={3}>{"Address: "+this.state.address}</Title>
                         <Card>
-                        <Form onFinish={this.onFinish} initialValues={{'TPcount':this.state.TPcount,Mcount:this.state.Mcount,HScount:this.state.HScount}}>
+                        <Form onFinish={this.onFinish} initialValues={{'TPcount':this.state.TPcount,Mcount:this.state.Mcount,HScount:this.state.HScount,note:this.state.note}}>
 
                             <Form.Item label={<span className="ant-form-text">You currently have </span>}>
                                 <Form.Item name="Mcount" noStyle>
@@ -70,7 +93,12 @@ class Distributor extends Component{
                                 <span className="ant-form-text"> toilet paper</span>
                             </Form.Item>
 
-                            <div style={{display: 'flex',justifyContent:"flex-end"}}>
+                            <span className="ant-form-text">notes:</span>
+                            <Form.Item name="note" noStyle>
+                                <TextArea rows={7}/>
+                            </Form.Item>
+
+                            <div style={{display: 'flex',justifyContent:"flex-end",paddingTop:10}}>
                                 <div style={{paddingRight:10}}>
                                     <Form.Item >
                                         <Button htmlType="submit">Update</Button>
