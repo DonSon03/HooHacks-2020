@@ -12,13 +12,28 @@ router.route('/add').post((req, res) => {
   console.log(req.body.phoneNumber)
   const firstName = req.body.firstName;  
   const phoneNumber = req.body.phoneNumber;
-  const newConsumer = new Consumer({
-    firstName,
-    phoneNumber
-  });
-  newConsumer.save()
-    .then(() => res.json('Consumer Added!'))
+
+  Consumer.find({phoneNumber: phoneNumber})
+    .then(exercise => {
+      console.log(exercise)
+      if(exercise.length === 0){
+        const newConsumer = new Consumer({
+          firstName,
+          phoneNumber
+        });
+        newConsumer.save()
+          .then(result => {
+            res.json(result)
+          })
+          .catch(err => res.status(400).json('Error: ' + err));
+      }
+      else{
+        res.json(exercise[0])
+      }
+      
+    })
     .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
 router.route('/:id').get((req, res) => {

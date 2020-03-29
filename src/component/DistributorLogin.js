@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Input, Button } from 'antd';
-import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
+import { MedicineBoxOutlined, PhoneOutlined } from '@ant-design/icons';
 
 import { Spin, Icon, Card, Divider, List, Avatar } from 'antd';
 
@@ -37,8 +37,8 @@ class DistributorLogin extends Component{
         return (
             <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '70%', marginRight:'5%',marginTop:'10%'}}>
             <Meta
-                title={<h1>Supply Me!</h1>}
-                style={{color:'#1A2E33'}}
+                title={<div><h1>Supply Me!</h1><i>Distributors</i></div>}
+                style={{color:'#1A2E33', textAlign:'center'}}
             />
 
             <Divider/>
@@ -50,6 +50,7 @@ class DistributorLogin extends Component{
                 remember: true,
             }}
             onFinish={this.onFinish}
+            style={{textAlign:'center'}}
             >
             <Form.Item
             name="pharmacyName"
@@ -62,7 +63,7 @@ class DistributorLogin extends Component{
             
             
             >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} 
+            <Input prefix={<MedicineBoxOutlined className="site-form-item-icon" />} 
                             placeholder="Pharmacy Name" 
                             
                             />
@@ -90,7 +91,7 @@ class DistributorLogin extends Component{
             </Button>
             <br></br>
             <br></br>
-            Or <a href="/signup">register now!</a>
+            Customers log in <a href="/">here.</a>
             </Form.Item>
             
             </Form>
