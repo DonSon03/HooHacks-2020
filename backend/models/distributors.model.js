@@ -7,12 +7,19 @@ const distributorSchema = new Schema({
         type: String, 
         required: true,
       },
-      companyNumber: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
+    companyNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      },
+    address: {type: String},
+    toiletPaper: {type: String},
+    mask: {type: String},
+    handSanitizers: {type: String},
+    descriptions: {type: String},
+    unique_id: {type: String},
+    phone_list: {type: [String]}
 }, {
   timestamps: true,
 });

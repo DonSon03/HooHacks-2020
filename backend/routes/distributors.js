@@ -30,19 +30,33 @@ router.route('/add').post((req, res) => {
       
     })
     .catch(err => res.status(400).json('Error: ' + err));
-
-  
 });
 
 router.route('/:id').get((req, res) => {
-  Exercise.findById(req.params.id)
-    .then(exercise => res.json(exercise))
+  Distributor.findById(req.params.id)
+    .then(distributor => res.json(distributor))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/:id').delete((req, res) => {
-  Exercise.findByIdAndDelete(req.params.id)
+  Distributor.findByIdAndDelete(req.params.id)
     .then(() => res.json('Distributor Deleted!'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+  Distributor.findById(req.params.id)
+    .then(distributor => {
+      distributor.address = req.body.address  ; 
+      distributor.toiletPaper = req.body.toiletPaper;
+      distributor.mask = req.body.mask;
+      distributor.handSanitizers = req.body.handSanitizers;
+      distributor.descriptions = req.body.descriptions;
+
+      distributor.save()
+        .then(() => res.json())
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
