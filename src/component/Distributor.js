@@ -40,7 +40,7 @@ class Distributor extends Component{
             return (
                 <div>
                     
-                    <Card title = {<Title level={1}>{this.state.user.pharmacyName+" "+this.state.user.companyNumber}</Title>}
+                    <Card hoverable={true} title = {<Title level={1}>{this.state.user.pharmacyName+" "+this.state.user.companyNumber}</Title>}
                         extra={<Button onClick={this.signout} icon={<LogoutOutlined />}></Button>}
                         bordered={true}
                         style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '20%', marginRight:'20%',marginTop:'5%'}}
