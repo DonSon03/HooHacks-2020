@@ -7,7 +7,7 @@ const distributorSchema = new Schema({
         type: String, 
         required: true,
       },
-  phoneNumber: {
+      companyNumber: {
     type: String,
     required: true,
     unique: true,

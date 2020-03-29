@@ -9,12 +9,12 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const pharmacyName = req.body.pharmacyName;
-    const phoneNumber = req.body.phoneNumber;
+    const companyNumber = req.body.companyNumber;
   
 
   const newDistributor = new Distributor({
     pharmacyName,
-    phoneNumber
+    companyNumber
 });
 
   newDistributor.save()

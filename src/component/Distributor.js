@@ -13,7 +13,7 @@ class Customer extends Component{
     render(){
         return (
 
-            <div className="App-header">
+            <div className="App-headers">
                 <Row>
                     <DistributorLogin/>
                 </Row>
