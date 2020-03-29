@@ -24,10 +24,10 @@ class Map extends Component {
                     this.props.locations.map(
                         (location,index) => 
                         <Marker
-                        key={index}
+                        key={location.indexMap}
                         lat={location.geometry.location.lat}
                         lng={location.geometry.location.lng}
-                        locationName={location.name + " (" + index + ")"}
+                        locationName={location.tagName}
                         text={index}
                         />
                     )
