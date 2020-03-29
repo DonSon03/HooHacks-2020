@@ -28,6 +28,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  animation: BackdroundDash 1s ease forwards;
 }
 
 .distributor-login-style {
@@ -43,10 +44,20 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  animation: BackdroundDash 1s ease forwards;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+@keyframes BackdroundDash {
+  0%{
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1;
+  }
 }
 
 @keyframes App-logo-spin {

@@ -35,7 +35,7 @@ class DistributorLogin extends Component{
 
     render(){
         return (
-            <Card bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '70%', marginRight:'5%',marginTop:'10%'}}>
+            <Card hoverable={true} bordered={true} style={{ backgroundColor:'white', borderRadius:'15px', marginLeft: '70%', marginRight:'5%',marginTop:'10%'}}>
             <Meta
                 title={<div><h1>Supply Me!</h1><i>Distributors</i></div>}
                 style={{color:'#1A2E33', textAlign:'center'}}
