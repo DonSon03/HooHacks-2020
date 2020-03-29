@@ -4,6 +4,7 @@ import React, { Component} from 'react';
 import { Modal, Button } from 'antd';
 
 import {markerStyle, markerStyleHover} from './marker_style.js';
+import axios from 'axios';
 
 export default class Marker extends Component {
 //   static propTypes = {
@@ -19,7 +20,14 @@ export default class Marker extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {visible: false}
+    this.state = {visible: false,gid: props.gid}
+  }
+
+  componentDidMount(){
+    axios.get('http://localhost:5000/distributors/google/'+this.state.gid)
+      .then(res=>{
+        this.setState({data:res.data, ...this.state})
+      })
   }
 
     showModal = () => {
@@ -43,24 +51,45 @@ export default class Marker extends Component {
   render() {
     const style = this.props.$hover ? markerStyleHover : markerStyle;
 
-    return (
-       <div style={style}>
-            
-            <a href="#" onClick={this.showModal}>{this.props.text}</a>
-            {/* <Button type="primary" onClick={this.showModal}>
-            Open Modal
-            </Button> */}
-            <Modal
-            title={this.props.locationName}
-            visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            </Modal>
-       </div>
-    );
+    if(this.state.data == null){
+      return (
+        <div style={style}>
+              
+              <a href="#" onClick={this.showModal}>{this.props.text}</a>
+              {/* <Button type="primary" onClick={this.showModal}>
+              Open Modal
+              </Button> */}
+              <Modal
+              title={this.props.locationName}
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              >
+              <p>Unfortunately, this place is not registered in our website...</p>
+              </Modal>
+        </div>
+      );
+    } else {
+      return (
+        <div style={style}>
+              
+              <a href="#" onClick={this.showModal}>{this.props.text}</a>
+              {/* <Button type="primary" onClick={this.showModal}>
+              Open Modal
+              </Button> */}
+              <Modal
+              title={this.props.locationName}
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              >
+              <p>{"Address: "+this.state.data.address}</p>
+              <p>{"Masks Count: "+this.state.data.mask}</p>
+              <p>{"Hand Sanitizers Count: "+this.state.data.handSanitizers}</p>
+              <p>{"Toilet Paper Count: "+this.state.data.toiletPaper}</p>
+              </Modal>
+        </div>
+      );
+    }
   }
 }

@@ -7,6 +7,7 @@ import UserInfo from './UserInfo'
 import { Row, Col } from 'antd';
 import axios from 'axios';
 import Cookies from 'js-cookie'
+import { isCompositeComponent } from 'react-dom/test-utils';
 
 
 const {Title} = Typography
