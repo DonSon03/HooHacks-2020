@@ -10,7 +10,7 @@ class Chooser extends Component{
     }
 
     onFinish(values){
-        console.log(values);
+        console.log(values)
     }
 
     render(){
