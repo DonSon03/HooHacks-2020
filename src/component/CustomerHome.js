@@ -4,6 +4,7 @@ import CustomerLogin from './CustomerLogin'
 import Customer from './Customer'
 import { Row, Col } from 'antd';
 import Cookies from 'js-cookie'
+import {withRouter} from "react-router-dom"
 
 class CustomerHome extends Component{
 
@@ -37,4 +38,4 @@ class CustomerHome extends Component{
     }
 }
 
-export default CustomerHome;
+export default withRouter(CustomerHome);

@@ -28,7 +28,7 @@ class Map extends Component {
                         lat={location.geometry.location.lat}
                         lng={location.geometry.location.lng}
                         locationName={location.tagName}
-                        text={index}
+                        text={location.indexMap}
                         />
                     )
                 }

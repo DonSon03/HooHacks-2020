@@ -7,7 +7,7 @@ const markerStyle = {
   left: -K_SIZE / 2,
   top: -K_SIZE / 2,
 
-  border: '5px solid #f44336',
+  border: '5px solid green',
   borderRadius: K_SIZE,
   backgroundColor: 'white',
   textAlign: 'center',

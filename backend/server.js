@@ -68,7 +68,7 @@ app.get("/api/get_verification_service", function(req, res) {
 
 app.get("/api/send_verification_token", function(req, res) {
     const sid = req.param('sid');
-    const phoneNumber = req.param('phone_number');
+    const phoneNumber = "+1" + req.param('phone_number');
 
     client.verify.services(sid)
     .verifications
@@ -85,7 +85,7 @@ app.get("/api/send_verification_token", function(req, res) {
 
 app.get("/api/check_verification_token", function(req, res) {
     const sid = req.param('sid');
-    const phoneNumber = req.param('phone_number');
+    const phoneNumber = "+1" + req.param('phone_number');
     const code = req.param('code');
 
     client.verify.services(sid)
