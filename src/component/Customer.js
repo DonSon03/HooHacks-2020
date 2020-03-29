@@ -19,10 +19,20 @@ class Customer extends Component{
         super();
         this.state = {usedSearch: false, address: "", lat: null, lng: null, locations: [], user: JSON.parse(Cookies.get("customerLogin"))}
         this.onSearch = this.onSearch.bind(this);
+        this.findPhoneNumber = this.findPhoneNumber.bind(this);
     }
 
     componentDidMount(){
 
+    }
+
+    findPhoneNumber(dbLocations, location){
+        for(var i = 0; i < dbLocations.length; i++){
+            let dbLocation = dbLocations[i];
+            if(location.id === dbLocation.unique_id){
+                return dbLocation.companyNumber;
+            }
+        }
     }
 
     onSearch(address){
@@ -38,22 +48,39 @@ class Customer extends Component{
                 axios.get(proxyurl + nearbyURL)
                     .then(nearbyResult => {
 
-                        const locations = nearbyResult.data.results
-                        
-                        for(var i = 0; i < locations.length; i++){
-                            locations[i].tagName = locations[i].name + " (" + (i+1) + ")";
-                            locations[i].indexMap = i+1;
-                        }
+                        axios.get("http://localhost:5000/distributors/")
+                            .then(distributorResult => {
 
-                        this.setState({
-                            usedSearch: true,
-                            address: address,
-                            lat: geocodeResult.data.results[0].geometry.location.lat,
-                            lng: geocodeResult.data.results[0].geometry.location.lng,
-                            locations: locations,
-                            user: JSON.parse(Cookies.get("customerLogin"))
-                        })
-                        
+                                const googleLocations = nearbyResult.data.results;
+                                const dbLocations =  distributorResult.data;
+
+                                const dbIds = dbLocations.map(pharmacy => pharmacy.unique_id)
+                                const googleIds = googleLocations.map(location => location.id)
+                                const intersectionIds = dbIds.filter(x => googleIds.includes(x));
+
+                                const dbFinalLocations = dbLocations.filter(location => intersectionIds.includes(location.unique_id))
+                                const finalLocations = googleLocations.filter(location => intersectionIds.includes(location.id))
+
+                                for(var i = 0; i < finalLocations.length; i++){
+                                    finalLocations[i].tagName = finalLocations[i].name + " (" + (i+1) + ")";
+                                    finalLocations[i].indexMap = i+1;
+                                    finalLocations[i].phoneNumber = this.findPhoneNumber(dbFinalLocations, finalLocations[i]);
+                                }
+
+                                console.log(finalLocations)
+
+                                this.setState({
+                                    usedSearch: true,
+                                    address: address,
+                                    lat: geocodeResult.data.results[0].geometry.location.lat,
+                                    lng: geocodeResult.data.results[0].geometry.location.lng,
+                                    locations: finalLocations,
+                                    user: JSON.parse(Cookies.get("customerLogin"))
+                                })
+                                
+                            }
+                        );
+
                     }
                 );
             }
@@ -69,7 +96,6 @@ class Customer extends Component{
                 ? <Search placeholder="input search text" disabled /> 
                 : <Search placeholder="input search text" onSearch={value => this.onSearch(value)} enterButton />}
             
-            
             <Row>
                 <Col span={16}>
                 {this.state.usedSearch ? 
@@ -84,7 +110,7 @@ class Customer extends Component{
                     </Row>
                     <Row>
                         {this.state.usedSearch ? 
-                        <Chooser locations={this.state.locations} />
+                        <Chooser locations={this.state.locations} phoneNumber={this.state.user.phoneNumber}/>
                         : 
                         <EmptyBox message="Enter in an address to see the list of nearby pharmacies."/>
                         }
