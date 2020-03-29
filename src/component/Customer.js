@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import Map from './Map'
-import { Input } from 'antd';
+import { Input,Button,Typography} from 'antd';
 import EmptyMap from './EmptyMap';
 import Chooser from './Chooser'
 import UserInfo from './UserInfo'
 import { Row, Col } from 'antd';
 import axios from 'axios';
+import Cookies from 'js-cookie'
+
+
+const {Title} = Typography
 
 const { Search } = Input;
 
@@ -19,6 +23,11 @@ class Customer extends Component{
 
     componentDidMount(){
 
+    }
+
+    signout(){
+        Cookies.remove('customerLogin')
+        window.location.reload()
     }
 
     onSearch(address){
@@ -56,7 +65,8 @@ class Customer extends Component{
     render(){
         return(
             <div>
-        
+                <Button onClick={this.signout}>signout</Button>
+                <Title>{Cookies.get("customerLogin")}</Title>
             {this.state.usedSearch 
                 ? <Search placeholder="input search text" disabled /> 
                 : <Search placeholder="input search text" onSearch={value => this.onSearch(value)} enterButton />}
