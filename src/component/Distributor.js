@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CustomerLogin from './CustomerLogin'
+import DistributorLogin from './DistributorLogin'
 import BGImage from '../assets/images/background.jpg'
 import { Row, Col } from 'antd';
 
@@ -13,9 +13,9 @@ class Customer extends Component{
     render(){
         return (
 
-            <div className="App-header">
+            <div className="App-headers">
                 <Row>
-                    <CustomerLogin/>
+                    <DistributorLogin/>
                 </Row>
             </div>
         );

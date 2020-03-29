@@ -15,8 +15,6 @@ export default function App() {
 
     //send info to backend
     console.log("Code Entered")
-
-    
   }
 
   return (
