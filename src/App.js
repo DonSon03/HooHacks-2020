@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,39 +7,33 @@ import {
   Link
 } from "react-router-dom";
 
+import Home from "./component/Home"
+import Login from "./component/Login"
+import Signup from "./component/Signup"
+import Customer from "./component/Customer"
 
-import Home from "./component/home"
-import Login from "./component/login"
-import Signup from "./component/signup"
-
-export default function App() {
+function App() {
   return (
+    // <div className="App-header">
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/customer">Customer</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
 
-          <Route path="/login">
-            <Login />
-          </Route>
-
-          <Route path="/signup">
-            <Signup />
+          <Route path="/customer">
+            <Customer />
           </Route>
 
           <Route path="/">
@@ -48,5 +43,8 @@ export default function App() {
         </Switch>
       </div>
     </Router>
+    // </div>
   );
 }
+
+export default App;

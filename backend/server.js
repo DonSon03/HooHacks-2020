@@ -91,3 +91,9 @@ app.get("/api/check_verification_token", function(req, res) {
         }
     );
 });
+
+app.post("/api/check_user_exists", function(req, res) {
+    const {firstName, phoneNumber} = req.body;
+
+    res.send({firstName: firstName, phoneNumber: phoneNumber});
+});
