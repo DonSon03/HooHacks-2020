@@ -5,7 +5,7 @@ import Distributor from './Distributor'
 import { Row, Col } from 'antd';
 import Cookies from 'js-cookie'
 
-class CustomerHome extends Component{
+class DistributorHome extends Component{
 
     authLogin(){
         var cookieInfo = Cookies.get('distributorLogin')
@@ -21,15 +21,16 @@ class CustomerHome extends Component{
     }
 
     render(){
+        
         if(this.authLogin()){
             return (
-                <Customer/>
+                <Distributor/>
             );
         } else {
             return (
-                <div className="customer-login-style">
+                <div className="distributor-login-style">
                     <Row>
-                        <CustomerLogin/>
+                        <DistributorLogin/>
                     </Row>
                 </div>
             )
@@ -37,4 +38,4 @@ class CustomerHome extends Component{
     }
 }
 
-export default CustomerHome;
+export default DistributorHome;
