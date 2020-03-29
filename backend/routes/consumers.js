@@ -8,6 +8,8 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+  console.log(req.body.firstName)
+  console.log(req.body.phoneNumber)
   const firstName = req.body.firstName;  
   const phoneNumber = req.body.phoneNumber;
   const newConsumer = new Consumer({
@@ -20,13 +22,13 @@ router.route('/add').post((req, res) => {
 });
 
 router.route('/:id').get((req, res) => {
-  Exercise.findById(req.params.id)
+  Consumer.findById(req.params.id)
     .then(exercise => res.json(exercise))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/:id').delete((req, res) => {
-  Exercise.findByIdAndDelete(req.params.id)
+  Consumer.findByIdAndDelete(req.params.id)
     .then(() => res.json('Consumer Deleted!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });

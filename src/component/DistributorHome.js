@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
-import CustomerLogin from './CustomerLogin'
-import Customer from './Customer'
+import DistributorLogin from './DistributorLogin'
+import Distributor from './Distributor'
 import { Row, Col } from 'antd';
 import Cookies from 'js-cookie'
 
 class CustomerHome extends Component{
 
     authLogin(){
-        var cookieInfo = Cookies.get('customerLogin')
+        var cookieInfo = Cookies.get('distributorLogin')
         if(cookieInfo == undefined){
             return false
         }
         //check if correct user
         if(JSON.parse(cookieInfo).firstName == "invalid"){
-            Cookies.remove("customerLogin")
+            Cookies.remove("distributorLogin")
             return false
         }
         return true

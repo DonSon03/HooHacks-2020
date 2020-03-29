@@ -3,7 +3,11 @@ import axios from 'axios';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
 
+import Cookies from "js-cookie"
+
 import { Spin, Icon, Card, Divider, List, Avatar } from 'antd';
+
+
 
 const { Meta } = Card;
 
@@ -26,12 +30,20 @@ class CustomerLogin extends Component{
         }
         console.log(user);
         axios.post('http://localhost:5000/consumers/add', user)
-          .then(res => console.log(res.data));
+            .then(res =>{
+                Cookies.set('customerLogin',user,{expires:1})
+                window.location.reload()
+            });
     
         this.setState({
           firstName: '',
           phoneNumber: ''
         })
+
+        //if Verified (Move this into axios)
+        if(true){
+        } 
+
     }
 
     render(){
