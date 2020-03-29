@@ -91,7 +91,7 @@ class CustomerLogin extends Component{
             </Button>
             <br></br>
             <br></br>
-            Or <a href="/signup">register now!</a>
+            Distributors log in : <a href="/distributor">here</a>
             </Form.Item>
             
             </Form>

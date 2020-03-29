@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
 import DistributorLogin from './DistributorLogin'
-import BGImage from '../assets/images/background.jpg'
 import { Row, Col } from 'antd';
 
-class Customer extends Component{
+class Distributor extends Component{
 
     constructor(){
         super();
@@ -13,7 +12,7 @@ class Customer extends Component{
     render(){
         return (
 
-            <div className="App-headers">
+            <div className="distributor-login-style">
                 <Row>
                     <DistributorLogin/>
                 </Row>
@@ -22,4 +21,4 @@ class Customer extends Component{
     }
 }
 
-export default Customer;
+export default Distributor;

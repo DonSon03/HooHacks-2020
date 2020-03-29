@@ -15,14 +15,14 @@
   }
 }
 
-.App-header {
+.customer-login-style {
   /* background-color: #282c34; */
-  background: url(./assets/images/background.jpg);
+  /* display: flex; */
+  background: url(./assets/images/customerBackground.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
   min-height: 100vh;
-  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -30,9 +30,9 @@
   color: white;
 }
 
-.App-headers {
+.distributor-login-style {
   /* background-color: #282c34; */
-  background: url(./assets/images/backgrounds.jpg);
+  background: url(./assets/images/distributorBackground.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;

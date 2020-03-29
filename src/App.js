@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Customer from "./component/Customer"
+import CustomerHome from "./component/CustomerHome"
 import Distributor from "./component/Distributor"
 
 function App() {
@@ -15,17 +16,34 @@ function App() {
     // <div className="App-header">
     <Router>
       <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Customer Home</Link>
+            </li>
+            <li>
+              <Link to="/customer">Customer Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/distributor">Distributor Home</Link>
+            </li>
+          </ul>
+        </nav>
       <Switch>
 
-<Route path="/distributor">
-  <Distributor />
-</Route>
+        <Route path="/customer">
+          <Customer />
+        </Route>
 
-<Route path="/">
-  <Customer />
-</Route>
+        <Route path="/distributor">
+          <Distributor />
+        </Route>
 
-</Switch>
+        <Route path="/">
+          <CustomerHome />
+        </Route>
+
+      </Switch>
       </div>
     </Router>
     // </div>
