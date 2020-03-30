@@ -19,13 +19,11 @@ class DistributorLogin extends Component{
     }
 
     onFinish(values){
-        console.log(values);
 
         const user = {
             pharmacyName: values.pharmacyName,
             companyNumber: values.companyNumber
         }
-        console.log(user);
         axios.post('http://localhost:5000/distributors/add', user)
           .then(res => {
               Cookies.set('distributorLogin',{uid:res.data,...user},{expires:1})
