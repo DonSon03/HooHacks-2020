@@ -49,7 +49,7 @@ class Customer extends Component{
                 axios.get(proxyurl + nearbyURL)
                     .then(nearbyResult => {
 
-                        axios.get("http://localhost:5000/distributors/")
+                        axios.get("/distributors/")
                             .then(distributorResult => {
 
                                 const googleLocations = nearbyResult.data.results;
