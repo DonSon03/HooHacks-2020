@@ -47,6 +47,22 @@
   animation: BackdroundDash 1s ease forwards;
 }
 
+.distributor-dashboard-style {
+  /* background-color: #282c34; */
+  background: url(./assets/images/pharmacy-shelves.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  animation: BackdroundDash 1s ease forwards;
+}
+
 .App-link {
   color: #61dafb;
 }

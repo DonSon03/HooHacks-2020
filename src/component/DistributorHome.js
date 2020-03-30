@@ -24,7 +24,9 @@ class DistributorHome extends Component{
         
         if(this.authLogin()){
             return (
-                <Distributor/>
+                <div className="distributor-dashboard-style">
+                    <Distributor/>
+                </div>
             );
         } else {
             return (
