@@ -24,7 +24,7 @@ export default class Marker extends Component {
   }
 
   componentDidMount(){
-    axios.get('http://localhost:5000/distributors/google/'+this.state.gid)
+    axios.get('/distributors/google/'+this.state.gid)
       .then(res=>{
         this.setState({data:res.data, ...this.state})
       })

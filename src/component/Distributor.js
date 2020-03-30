@@ -22,7 +22,7 @@ class Distributor extends Component{
     componentDidMount(){
         const cookieInfo = JSON.parse(Cookies.get("distributorLogin"));
 
-        axios.get('http://localhost:5000/distributors/'+cookieInfo.uid._id)
+        axios.get('/distributors/'+cookieInfo.uid._id)
             .then(res=>{
                 this.setState({
                     user: cookieInfo,
@@ -43,19 +43,21 @@ class Distributor extends Component{
             handSanitizers:values.HScount,
             descriptions:values.note
         }
-        axios.post("http://localhost:5000/distributors/update/"+cookieInfo.uid._id,updateVals)
+        axios.post("/distributors/update/"+cookieInfo.uid._id,updateVals)
             .then(res=>{
                 window.location.reload()
             })
 
     }
     notify(){
+        
         const cookieInfo = JSON.parse(Cookies.get("distributorLogin"))
+        console.log(cookieInfo)
         const phoneNumbers = cookieInfo.uid.phone_list;
 
         for(var number in phoneNumbers){
             const message = "Medical resources have been refilled at " + cookieInfo.uid.pharmacyName + " (Address: " + cookieInfo.uid.address + ")! Come pick up your supplies now!";
-            axios.post("http://localhost:5000/api/send_sms/",
+            axios.post("/api/send_sms/",
             {message: message , phone_number:phoneNumbers[number]})
             .then(res => {});
         }
