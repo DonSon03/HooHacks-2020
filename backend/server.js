@@ -18,7 +18,7 @@ app.use(express.json());
 
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { dbName:"HooDB", useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+mongoose.connect( process.env.MONGODB_URI || uri, { dbName:"HooDB", useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
