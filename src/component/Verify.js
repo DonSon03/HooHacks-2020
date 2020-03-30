@@ -26,7 +26,6 @@ class Verify extends Component{
         
         axios.get("http://localhost:5000/api/check_verification_token?sid="+sid+"&phone_number="+user.phoneNumber+"&code="+value.code)
             .then(checkTokenRes =>{
-                console.log(checkTokenRes)
                 if(checkTokenRes.data.data.status === "approved"){
                     Cookies.set('customerLogin',user,{expires:1})
                     this.setState({authenticated: true})

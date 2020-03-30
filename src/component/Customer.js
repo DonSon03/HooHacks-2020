@@ -68,8 +68,6 @@ class Customer extends Component{
                                     finalLocations[i].phoneNumber = this.findPhoneNumber(dbFinalLocations, finalLocations[i]);
                                 }
 
-                                console.log(finalLocations)
-
                                 this.setState({
                                     usedSearch: true,
                                     address: address,

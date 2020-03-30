@@ -15,9 +15,7 @@ class Chooser extends Component{
         for(var id in values){
             if(values[id]){
                 axios.post('http://localhost:5000/distributors/updateCompanyPhoneList', {id:id, phoneNumber: values.phoneNumber})
-                .then(res =>{
-                    console.log(res)
-                });
+                .then(res =>{});
             }
         }
 

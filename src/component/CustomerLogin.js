@@ -32,14 +32,10 @@ class CustomerLogin extends Component{
         axios.post('http://localhost:5000/consumers/add', user)
             .then(mongoRes =>{
 
-                console.log(mongoRes)
-
                 axios.get('http://localhost:5000/api/get_verification_service?friendly_name=Supply Me', user)
                     .then(getVerificationServiceRes =>{
-                        console.log(getVerificationServiceRes)
-                        const createdSid = getVerificationServiceRes.data.data.sid
-                        const sendPhoneNumber = user.phoneNumber
-                        console.log("http://localhost:5000/api/send_verification_token?sid=" + createdSid + "&phone_number=" + sendPhoneNumber)
+                        const createdSid = getVerificationServiceRes.data.data.sid;
+                        const sendPhoneNumber = user.phoneNumber;
                         axios.get("http://localhost:5000/api/send_verification_token?sid=" + createdSid + "&phone_number=" + sendPhoneNumber)
                             .then(sendTokenRes =>{
 
